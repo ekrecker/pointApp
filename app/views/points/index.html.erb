@@ -1,0 +1,11 @@
+<h1>Points#index</h1>
+<% @points.each do | point | %>
+  <ul>
+    <li><%= point.sender %></li>
+    <li><%= point.receiver %></li>
+    <li><%= point.mindType %></li>
+    <li><%= point.sender_comment %></li>
+    <li><%= point.receiver_comment %></li>
+    <li><%= point.likes %></li>
+  </ul>
+<% end %>

@@ -1,0 +1,11 @@
+<%= form_for Point.new do |f| %>
+  <%= f.label :sender %>
+  <%= f.text_field :sender %>
+  <%= f.label :receiver %>
+  <%= f.text_field :receiver%>
+  <%= f.label :mindType %>
+  <%= f.text_field :mindType %>
+  <%= f.label :sender_comment %>
+  <%= f.text_area :sender_comment %>
+  <%= f.submit %>
+<% end %>
