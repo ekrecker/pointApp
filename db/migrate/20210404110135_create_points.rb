@@ -3,9 +3,9 @@ class CreatePoints < ActiveRecord::Migration[6.1]
     create_table :points do |t|
       t.string :sender
       t.string :receiver
-      t.string :mindType
-      t.string :sender_comment
-      t.string :recever_comment
+      t.string :mindtype
+      t.string :comment
+      t.string :reply
       t.integer :likes
 
       t.timestamps

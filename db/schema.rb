@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_03_134942) do
+ActiveRecord::Schema.define(version: 2021_04_04_110135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 2021_04_03_134942) do
   create_table "points", force: :cascade do |t|
     t.string "sender"
     t.string "receiver"
-    t.string "mindType"
-    t.string "sender_comment"
-    t.string "receiver_comment"
+    t.string "mindtype"
+    t.string "comment"
+    t.string "reply"
     t.integer "likes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
