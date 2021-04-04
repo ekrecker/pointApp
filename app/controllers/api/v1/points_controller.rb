@@ -1,10 +1,14 @@
-class PointsController < ApplicationController
+class Api::V1::PointsController < ApiController
+  before_action :set_points, only: [:show]
+
   def index
-    @points = Point.all
+    points = Point.all
+    render json: points
   end
 
   def show
-    @point = Point.find_by(:sender => params[:sender])
+    @point = Point.find(params[:id])
+    render json: @point
   end
 
   def new
