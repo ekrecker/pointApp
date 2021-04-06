@@ -2,6 +2,17 @@
 
 This environment has been created by docker containers
 
+webpacker install
+```
+rails webpacker:install
+rails webpacker:compile
+```
+
+axios
+```
+yarn add axios
+```
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
