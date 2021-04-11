@@ -1,5 +1,7 @@
 class Api::V1::PointsController < ApiController
-  before_action :set_points, only: [:show]
+  before_action :set_point, only: [:show]
+
+  rescue_from Exception, with: :render_status_500
 
   def index
     points = Point.all
@@ -7,20 +9,28 @@ class Api::V1::PointsController < ApiController
   end
 
   def show
-    @point = Point.find(params[:id])
     render json: @point
   end
 
-  def new
+  def create
+    point = Point.new(point_params)
+    if point.save
+      render json: point, status: :created
+    else
+      render json: { errors: point.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
-  def create
-    @point = Point.new
-    @point.sender = params[:point][:sender]
-    @point.receiver = params[:point][:receiver]
-    @point.mindType = params[:point][:mindType]
-    @point.sender_comment = params[:point][:sender_comment]
-    @point.save
-    redirect_to '/points/index'
-  end
+  private
+    def set_point
+      @point = Point.find(params[:id])
+    end
+
+    def point_params
+      params.fetch(:point, {}).permit(:sender, :receiver, :mindtype, :comment, :reply, :likes)
+    end
+
+    def render_status_500(exception)
+      render json: { errors: [exception] }, status: 500
+    end
 end
