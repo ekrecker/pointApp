@@ -8,10 +8,17 @@ rails webpacker:install
 rails webpacker:compile
 ```
 
+vuetify
+```
+yarn add vuetify
+yarn add @mdi/font
+```
+
 axios
 ```
 yarn add axios
 ```
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
