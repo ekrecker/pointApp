@@ -1,6 +1,13 @@
 <template>
-  <div>
-    <router-view></router-view>
+  <div id="app">
+    <v-app>
+      <customHeader />
+      <v-main>
+        <v-container fluid>
+          <router-view />
+        </v-container>
+      </v-main>
+    </v-app>
   </div>
 </template>
 
@@ -12,6 +19,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import VueRouter from 'vue-router'
 
 import IndexPage from 'IndexPage.vue'
+import customHeader from 'header.vue'
 import PointDetailPage from 'PointDetailPage.vue'
 import PointNewPage from 'PointNewPage.vue'
 
@@ -25,7 +33,7 @@ const router = new VueRouter({
       name: 'PointDetailPage',
       component: PointDetailPage 
     },
-    { path: '/points/new',
+    { path: '/new',
       name: 'PointNewPage',
       component: PointNewPage
     }
@@ -42,6 +50,9 @@ Vue.use(Vuetify)
 Vue.use(VueRouter)
 
 export default {
+  components: {
+    customHeader
+  },
   vuetify,
   router
 }

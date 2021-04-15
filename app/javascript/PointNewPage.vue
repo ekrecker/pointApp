@@ -1,24 +1,43 @@
 <template>
-  <form @submit.prevent="createPoint">
-    <div v-if="errors.length != 0">
-      <ul v-for="error in errors" :key="error">
-        <li><font color="red">{{ error }}</font></li>
-      </ul>
-    </div>
-    <div>
-      <label>送りたい人</label>
-      <input v-model="point.receiver" type="text">
-    </div>
-    <div>
-      <label>発揮したマインド</label>
-      <input v-model="point.mindtype" type="text">
-    </div>
-    <div>
-      <label>コメント</label>
-      <input v-model="point.comment" type="text">
-    </div>
-    <button type="submit">送る</button>
-  </form>
+  <v-form
+    ref="form"
+    v-model="valid"
+    lazy-validation
+  >
+    <v-text-field
+      v-model="point.receiver"
+      label="送りたい人"
+      required
+    ></v-text-field>
+    <v-text-field
+      v-model="point.mindtype"
+      label="発揮したマインド"
+      required
+    ></v-text-field>
+    <v-text-field
+      v-model="point.comment"
+      label="コメント"
+      required
+    ></v-text-field>
+
+    <v-btn
+      :disabled="!valid"
+      color="success"
+      class="mr-4"
+      @click="validate"
+      v-on:submit.prevent="createPoint"
+    >
+      ポイントをおくる
+    </v-btn>
+
+    <v-btn
+      color="error"
+      class="mr-4"
+      @click="reset"
+    >
+      フォームクリア
+    </v-btn>
+  </v-form>
 </template>
 
 <script>
@@ -26,6 +45,7 @@ import axios from 'axios'
 export default ({
   data: function() {
     return {
+      valid: true,
       point: {
         sender: 'hoge',
         receiver: '',
@@ -38,6 +58,12 @@ export default ({
     }
   },
   methods: {
+    validate : function () {
+      this.$refs.form.validate()
+    },
+    reset: function () {
+      this.$refs.form.reset()
+    },
     createPoint: function() {
       axios
         .post('/api/v1/points', this.point)

@@ -1,18 +1,17 @@
 <template>
-  <div id="app">
-    <v-app>
-      <customHeader />
-    </v-app>
+  <div class="index">
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import customHeader from 'header.vue'
+import PointNewPage from 'PointNewPage'
 
 export default {
   components: {
-    customHeader
+    customHeader,
+    PointNewPage
   },
   data: function () {
     return {
