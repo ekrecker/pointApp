@@ -7,25 +7,25 @@
     <v-text-field
       v-model="point.receiver"
       label="送りたい人"
-      required
+      :rules="required"
     ></v-text-field>
     <v-text-field
       v-model="point.mindtype"
       label="発揮したマインド"
-      required
+      :rules="required"
     ></v-text-field>
-    <v-text-field
+    <v-textarea
+      outlined rows="5"
       v-model="point.comment"
       label="コメント"
-      required
-    ></v-text-field>
+      :rules="required"
+    ></v-textarea>
 
     <v-btn
       :disabled="!valid"
       color="success"
       class="mr-4"
-      @click="validate"
-      v-on:submit.prevent="createPoint"
+      @click="createPoint"
     >
       ポイントをおくる
     </v-btn>
@@ -46,6 +46,7 @@ export default ({
   data: function() {
     return {
       valid: true,
+      required: value => !!value || "必ず入力してください",
       point: {
         sender: 'hoge',
         receiver: '',
