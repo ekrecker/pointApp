@@ -25,6 +25,13 @@
       :rules="rule"
     ></v-textarea>
 
+    <v-checkbox
+      v-model="checkbox"
+      :rules="[v => !!v || 'チェックしてください']"
+      label="この内容でおくりますか?"
+      required
+    ></v-checkbox>
+
     <v-btn
       :disabled="!valid"
       color="success"
@@ -53,6 +60,7 @@ export default ({
       rule: [
         v => !!v || '必ず入力してください'
       ],
+      checkbox: false,
       mindtype: [
         'TEAMWORK',
         'SPEEDY',
@@ -72,25 +80,27 @@ export default ({
     }
   },
   methods: {
-    validate : function () {
-      this.$refs.form.validate()
+    validate: function () {
+      return this.$refs.form.validate()
     },
     reset: function () {
       this.$refs.form.reset()
     },
     createPoint: function() {
-      axios
-        .post('/api/v1/points', this.point)
-        .then(response => {
-          let point = response.data;
-          this.$router.push({ name: 'PointDetailPage', params: {id: point.id } });
-        })
-        .catch(error => {
-          console.error(error);
-          if(error.response.data && error.response.data.errors) {
-            this.error = error.response.data.errors
-          }
-        });
+      if(this.validate()){
+        axios
+          .post('/api/v1/points', this.point)
+          .then(response => {
+            let point = response.data;
+            this.$router.push({ name: 'PointDetailPage', params: {id: point.id } });
+          })
+          .catch(error => {
+            console.error(error);
+            if(error.response.data && error.response.data.errors) {
+              this.error = error.response.data.errors
+            }
+          });
+      }
     }
   }
 })
