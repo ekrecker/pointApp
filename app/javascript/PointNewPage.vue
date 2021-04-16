@@ -7,18 +7,22 @@
     <v-text-field
       v-model="point.receiver"
       label="送りたい人"
-      :rules="required"
+      :rules="rule"
+      required
     ></v-text-field>
-    <v-text-field
-      v-model="point.mindtype"
-      label="発揮したマインド"
-      :rules="required"
-    ></v-text-field>
+    <v-select
+     v-model="point.mindtype"
+     :items="mindtype"
+     :menu-props="{ top: true, offsetY: true }"
+     :rules="[v => !!v || '必ず選択してください']"
+     label="発揮したマインド"
+     required
+    ></v-select>
     <v-textarea
-      outlined rows="5"
       v-model="point.comment"
+      outlined rows="5"
       label="コメント"
-      :rules="required"
+      :rules="rule"
     ></v-textarea>
 
     <v-btn
@@ -46,7 +50,16 @@ export default ({
   data: function() {
     return {
       valid: true,
-      required: value => !!value || "必ず入力してください",
+      rule: [
+        v => !!v || '必ず入力してください'
+      ],
+      mindtype: [
+        'TEAMWORK',
+        'SPEEDY',
+        'INSIGHT',
+        'HERO',
+        'PROFESSIONAL'
+      ],
       point: {
         sender: 'hoge',
         receiver: '',
