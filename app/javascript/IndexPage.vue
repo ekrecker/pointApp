@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <h2>マイページ</h2>
   </div>
 </template>
 

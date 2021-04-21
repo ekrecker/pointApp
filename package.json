@@ -8,6 +8,8 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.2.1",
     "axios": "^0.21.1",
+    "firebase-tools": "^9.10.0",
+    "firebaseui": "^4.8.0",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.6",
