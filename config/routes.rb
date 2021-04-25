@@ -7,12 +7,18 @@ Rails.application.routes.draw do
   #
   root to: 'home#index'
   
-  #get 'home/index'
+  get 'api/v1/users/get_current_user'
   #root to: 'home#index'
 
   namespace :api, {format: 'json'} do
     namespace :v1 do
       resources :points, only: [:index, :show, :create]
+    end
+  end
+
+  namespace :api, {format: 'json'} do
+    namespace :v1 do
+      resources :users, only: [:index]
     end
   end
 end
