@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <h2>マイページ</h2>
+    <h2>マイページ {{ user.username }}</h2>
   </div>
 </template>
 
@@ -16,13 +16,18 @@ export default {
   },
   data: function () {
     return {
-      points: [] 
+      points: [], 
+      user: []
     }
   },
   mounted () {
     axios 
       .get('/api/v1/points.json')
       .then(response => (this.points = response.data))
+
+    axios 
+      .get('/api/v1/users/get_current_user.json')
+      .then(response => (this.user = response.data))
   }
 }
 </script>
