@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: circleci/ruby:3.0.0-alpine3.13
+      - image: circleci/ruby:3.0.0-node-browsers
         environment:
           RAILS_ENV: test
       - image: circleci/postgres:13.0-alpine
