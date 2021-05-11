@@ -1,0 +1,29 @@
+version: 2
+
+jobs:
+  test:
+    docker:
+      - image: circleci/ruby:3.0.0-node-browsers
+        environment:
+          RAILS_ENV: test
+      - image: circleci/postgres:13.0
+        environment:
+          POSTGRES_HOST_AUTH_METHOD: trust
+    working_directory: ~/myapp
+    steps:
+      - checkout
+      - run:
+          name: bundle install
+          command: bundle install
+      - run:
+          name: Setup db
+          command: rake db:schema:load
+      - run:
+          name: Run rspec
+          command: rspec
+
+workflows:
+  version: 2
+  workflows:
+    jobs:
+      - test
