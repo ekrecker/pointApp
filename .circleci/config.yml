@@ -8,7 +8,9 @@ jobs:
           RAILS_ENV: test
       - image: circleci/postgres:13.0
         environment:
-          POSTGRES_PASSWORD: password
+          POSTGRES_USER: circleci
+          POSTGRES_DB: postgre_test 
+          POSTGRES_HOST_AUTH_METHOD: trust
     working_directory: ~/myapp
     steps:
       - checkout
@@ -17,10 +19,12 @@ jobs:
           command: bundle install
       - run:
           name: Setup db
-          command: rake db:schema:load
+          command: | 
+            dockerize -wait tcp://localhost:5432 -timeout 1m
+            bundle exec rake db:schema:load
       - run:
           name: Run rails server
-          command: rails s -p 3000 -b '0.0.0.0'
+          command: bundle exec rails s -p 3000 -b '0.0.0.0'
       - run:
           name: Run rspec
           command: rspec
