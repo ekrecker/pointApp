@@ -8,8 +8,7 @@ jobs:
           RAILS_ENV: test
       - image: circleci/postgres:13.0
         environment:
-          POSTGRES_USER: circleci
-          POSTGRES_DB: postgre_test 
+          POSTGRES_USER: postgres 
           POSTGRES_HOST_AUTH_METHOD: trust
     working_directory: ~/myapp
     steps:
