@@ -1,0 +1,36 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: circleci/ruby:3.0.0-node-browsers
+        environment:
+          RAILS_ENV: test
+      - image: circleci/postgres:13.0
+        environment:
+          POSTGRES_USER: postgres 
+          POSTGRES_HOST_AUTH_METHOD: trust
+    working_directory: ~/myapp
+    steps:
+      - checkout
+      - run:
+          name: bundle install
+          command: bundle install
+      - run:
+          name: Setup db
+          command: | 
+            dockerize -wait tcp://localhost:5432 -timeout 1m
+            bundle exec rake db:create RAILS_ENV=test
+            bundle exec rake db:schema:load RAILS_ENV=test
+      - run:
+          name: Run rails server
+          command: bundle exec rails s -d -p 3000 -b '0.0.0.0'
+      - run:
+          name: Run rspec
+          command: rspec
+
+workflows:
+  version: 2
+  workflows:
+    jobs:
+      - test
