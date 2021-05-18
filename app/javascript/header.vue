@@ -61,7 +61,7 @@
         group: null,
         items: [
           { title: 'ポイントをおくる', icon: 'mdi-send', path: '/new'},
-          { title: 'ポイント一覧', icon: 'mdi-star-four-points-outline', path: ''}
+          { title: 'ポイント一覧', icon: 'mdi-star-four-points-outline', path: '/timeline'}
         ]
       }
     },

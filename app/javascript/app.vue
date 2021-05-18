@@ -22,6 +22,7 @@ import IndexPage from 'IndexPage.vue'
 import customHeader from 'header.vue'
 import PointDetailPage from 'PointDetailPage.vue'
 import PointNewPage from 'PointNewPage.vue'
+import TimeLinePage from 'TimeLinePage.vue'
 
 const router = new VueRouter({
   routes: [
@@ -36,6 +37,10 @@ const router = new VueRouter({
     { path: '/new',
       name: 'PointNewPage',
       component: PointNewPage
+    },
+    { path: '/timeline',
+      name: 'TimeLinePage',
+      component: TimeLinePage 
     }
   ]
 })
