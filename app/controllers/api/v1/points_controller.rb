@@ -1,5 +1,5 @@
 class Api::V1::PointsController < ApiController
-  before_action :set_point, only: [:show]
+  before_action :set_point, only: [:show, :destroy]
 
   rescue_from Exception, with: :render_status_500
 
@@ -19,6 +19,11 @@ class Api::V1::PointsController < ApiController
     else
       render json: { errors: point.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @point.destroy!
+    head :no_content
   end
 
   private
