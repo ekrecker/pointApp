@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   namespace :api, {format: 'json'} do
     namespace :v1 do
-      resources :points, only: [:index, :show, :create]
+      resources :points, only: [:index, :show, :create, :destroy]
     end
   end
 
